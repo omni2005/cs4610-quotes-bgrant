@@ -1,11 +1,67 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+async function searchAPI(searchedName: String): Promise<Response> {
+  const result = await fetch("https://usu-quotes-mimic.vercel.app/api/search?query=" + searchedName);
+  console.log(await result.json())
+  return result
+}
+
+async function randomQuote(): Promise<Response> {
+  const result = await fetch("https://usu-quotes-mimic.vercel.app/api/random");
+  console.log(await result.json())
+  return result
+}
+
+export function App() {
+  var [name, setName] = useState("")
+
+    function search(event: React.SyntheticEvent<HTMLFormElement>) {
+      event.preventDefault()
+      var searchResults = searchAPI(name)
+    }
+
+    
+    /*
+    useEffect(() => {
+      getAPI(searchedName)
+      .then(res => res.json())
+      .then(quote => console.log(quote))
+    
+      if (searchedName.length > 0) {
+         update screen
+      }
+  
+      return () => {
+        console.log("unmounted")
+      }
+      }, [])
+      */
+
+  const result = randomQuote()
 
   return (
+
+    <><h1>Quote Search</h1><div>
+      <form onSubmit={search}>
+      <input
+        type="text"
+        value={name}
+        placeholder="Enter a name"
+        onChange={e => setName(e.target.value)} />
+      <button
+        type="submit">Search
+      </button>
+      </form>
+    </div>
+    
+    <div>
+      {}
+    </div>
+    </>
+
+  /*
     <div className="App">
       <div>
         <a href="https://vitejs.dev" target="_blank">
@@ -28,7 +84,6 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
+*/
   )
 }
-
-export default App
