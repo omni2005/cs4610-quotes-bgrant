@@ -8,24 +8,34 @@ async function searchAPI(searchedName: String): Promise<Response> {
   return result
 }
 
-async function randomQuote(): Promise<Response> {
-  const result = await fetch("https://usu-quotes-mimic.vercel.app/api/random");
-  console.log(await result.json())
-  return result
+interface Quote {
+  _id: String
+  content: String
+  author: String
 }
 
 export function App() {
-  var [name, setName] = useState("")
+  const [name, setName] = useState("")
+  const [quote, setQuote] = useState<Quote | null>()
 
-    function search(event: React.SyntheticEvent<HTMLFormElement>) {
-      event.preventDefault()
-      var searchResults = searchAPI(name)
-    }
 
-    
+  async function randomQuote() {
+    const result = await fetch("https://usu-quotes-mimic.vercel.app/api/random");
+    setQuote(await result.json())
+  }
+
+  function search(event: React.SyntheticEvent<HTMLFormElement>) {
+    event.preventDefault()
+    var searchResults = searchAPI(name)
+  }
+
+    useEffect(() => {
+      randomQuote()
+    }, [])
+
     /*
     useEffect(() => {
-      getAPI(searchedName)
+      getAPI(searchResults)
       .then(res => res.json())
       .then(quote => console.log(quote))
     
