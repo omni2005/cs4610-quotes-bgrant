@@ -1,4 +1,3 @@
-import reactLogo from './assets/react.svg'
 import './App.css'
 import { useEffect, useState } from 'react'
 
@@ -48,17 +47,17 @@ export function App() {
         </form>
         </div>
       
-      {className != "postsearch" &&
-      <div className='quotebox'>
-        {quote?.content} 
-        - {quote?.author}
-      </div>
-      }
+        {className != "postsearch" &&
+          <div className='quotebox'>
+            {quote?.content} 
+            - {quote?.author}
+          </div>
+        }
 
-      {quotes?.map((q) => (
-      <div className='quotebox' key={q._id}>
-        {q.content} - {q.author}
-      </div>))}
+        {quotes?.map((q) => (
+        <div className='quotebox' key={q._id}>
+          {q.content} - {q.author}
+        </div>))}
 
       </div>
     );
