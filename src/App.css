@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: 100%;
 }
 
 .logo {
@@ -34,6 +35,27 @@
 
 .card {
   padding: 2em;
+}
+
+.presearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.postsearch {
+  padding: 2em;
+}
+
+.quotebox {
+  background-color: bisque;
+  padding: 2em;
+  width: 100%;
+  text-align: center;
+  place-items: center;
+  display: flex;
+  justify-content: center;
+  border-top: 3px dotted #bbb;
 }
 
 .read-the-docs {
